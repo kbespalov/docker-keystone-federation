@@ -21,7 +21,7 @@ COPY ./configs/properties/* /dists/
 RUN ./idp/bin/install.sh -propertyfile install.properties
 RUN ./idp/bin/ant.sh -f /opt/shibboleth-idp/bin/ant-jetty.xml -propertyfile install.properties
 # to make possible https access
-RUN iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443
+#RUN iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443
 
 # replace xmlbeans: attribute-map, access-control, etc
 COPY ./configs/beans/* /opt/shibboleth-idp/conf/
