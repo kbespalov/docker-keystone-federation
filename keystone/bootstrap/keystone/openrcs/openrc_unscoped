@@ -1,0 +1,3 @@
+export OS_IDENTITY_API_VERSION=3
+export OS_TOKEN=405efe547d3f4c27b48e53bc5815626e
+export OS_URL=http://keystone:5000/v3

@@ -1,0 +1,60 @@
+dn: ou=Groups,dc=openstack,dc=com
+changetype: add
+objectclass: top
+objectclass: organizationalUnit
+ou: Groups
+
+-
+
+dn: ou=Users,dc=openstack,dc=com
+changetype: add
+objectclass: top
+objectclass: organizationalUnit
+ou: Users
+
+-
+
+dn: cn=admin,ou=Users,dc=openstack,dc=com
+changetype: add
+cn: admin
+sn: admin
+description: Openstack Admin
+mail: admin@openstack.com
+userPassword:: e01ENX1zS1dVQm9BMWJDNzNNRERnbjVFdlhnPT0=
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+
+-
+
+dn: cn=admin,ou=Groups,dc=openstack,dc=com
+changetype: add
+cn: admin
+member: cn=admin,ou=Users,dc=openstack,dc=com
+objectClass: groupOfNames
+objectClass: top
+owner: cn=admin,ou=Users,dc=openstack,dc=com
+
+-
+
+dn: cn=dm,ou=Users,dc=openstack,dc=com
+changetype: add
+cn: dm
+description: Openstack Principal Engineer
+mail: dm@openstack.com
+userPassword:: e01ENX1zS1dVQm9BMWJDNzNNRERnbjVFdlhnPT0=
+sn: dm
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+
+-
+
+dn: cn=enabled,ou=Groups,dc=openstack,dc=com
+changetype: add
+cn: enabled
+member: cn=admin,ou=Users,dc=openstack,dc=com
+member: cn=dm,ou=Users,dc=openstack,dc=com
+objectClass: groupOfNames
+objectClass: top
+owner: cn=admin,ou=Users,dc=openstack,dc=com

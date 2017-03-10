@@ -1,0 +1,71 @@
+version: "3"
+
+networks:
+   dckr:
+     driver: bridge
+     ipam:
+        driver: default
+        config:
+           - subnet: 172.22.0.0/16
+
+services:
+  database:
+     image: mysql
+     container_name: database
+     networks:
+       - dckr
+     environment:
+       MYSQL_ROOT_PASSWORD: r00tme
+       MYSQL_DATABASE: keystone
+       MYSQL_USER: keystone
+       MYSQL_PASSWORD: r00tme
+
+  idp:
+    build: ./shibboleth
+    container_name: idp
+    hostname: idp
+    networks:
+      - dckr
+    ports:
+      - "443:8443"
+    depends_on:
+      - ldap
+
+  ldap:
+     image: osixia/openldap:1.1.8
+     container_name: ldap
+     hostname: ldap
+     networks:
+       - dckr
+     environment:
+       LDAP_ORGANISATION: Openstack
+       LDAP_DOMAIN: openstack.com
+       LDAP_ADMIN_PASSWORD: r00tme
+
+  phpldapadmin:
+     image: osixia/phpldapadmin
+     hostname: phpldapadmin
+     networks:
+       - dckr
+     environment:
+       PHPLDAPADMIN_LDAP_HOSTS: ldap
+       PHPLDAPADMIN_HTTPS: "false"
+
+  keystone:
+    ports:
+      - "5000:5000"
+    build:
+      context: ./keystone
+      args:
+        keystone_version: stable/ocata
+    environment:
+      bootstrap: 1
+
+    container_name: keystone
+    hostname: keystone
+    networks:
+      - dckr
+    depends_on:
+      - database
+      - ldap
+      - idp

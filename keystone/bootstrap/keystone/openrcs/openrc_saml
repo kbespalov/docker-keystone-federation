@@ -1,0 +1,12 @@
+export OS_IDENTITY_API_VERSION=3
+export OS_AUTH_TYPE=v3samlpassword
+export OS_AUTH_URL=http://keystone:5000/v3
+export OS_IDENTITY_PROVIDER=shibboleth
+export OS_PROTOCOL=saml
+export OS_IDENTITY_PROVIDER_URL=http://idp/idp/shibboleth
+export OS_USERNAME=dm
+export OS_PASSWORD=r00tme
+export OS_PROJECT_NAME=federation
+export OS_PROJECT_DOMAIN_ID=default
+
+unset OS_USER_DOMAIN_NAME
