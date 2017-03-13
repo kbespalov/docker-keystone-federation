@@ -8,5 +8,3 @@ export OS_USERNAME=dm
 export OS_PASSWORD=r00tme
 export OS_PROJECT_NAME=federation
 export OS_PROJECT_DOMAIN_ID=default
-
-unset OS_USER_DOMAIN_NAME

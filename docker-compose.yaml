@@ -28,6 +28,7 @@ services:
     network_mode: host
     extra_hosts:
       - "ldap:172.22.0.2"
+      - "keystone:172.18.161.52"
     ports:
       - "80:80"
       - "443:443"
@@ -47,12 +48,15 @@ services:
      LDAP_ORGANISATION: Openstack
      LDAP_DOMAIN: openstack.com
      LDAP_ADMIN_PASSWORD: r00tme
-
+  # 
   # phpldapadmin:
   #    image: osixia/phpldapadmin
   #    hostname: phpldapadmin
-  #    networks:
-  #      - dckr
+  #    network_mode: host
+  #    extra_hosts:
+  #      - "ldap:172.22.0.2"
+  #    ports:
+  #      - "1488:80"
   #    environment:
   #      PHPLDAPADMIN_LDAP_HOSTS: ldap
   #      PHPLDAPADMIN_HTTPS: "false"
