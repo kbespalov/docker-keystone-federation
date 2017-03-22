@@ -1,31 +1,38 @@
 version: "3"
 
 networks:
-   dckr:
+  openstack:
      driver: bridge
      ipam:
-        driver: default
-        config:
-           - subnet: 172.22.0.0/16
-
+       driver: default
+       config:
+          - subnet: 172.22.0.0/24
 services:
+
   database:
-     image: mysql
-     container_name: database
-     networks:
-       - dckr
-     environment:
-       MYSQL_ROOT_PASSWORD: r00tme
-       MYSQL_DATABASE: keystone
-       MYSQL_USER: keystone
-       MYSQL_PASSWORD: r00tme
+    image: mysql
+    container_name: database
+    networks:
+      openstack:
+        ipv4_address: 172.22.0.3
+    environment:
+      MYSQL_ROOT_PASSWORD: r00tme
+      MYSQL_DATABASE: keystone
+      MYSQL_USER: keystone
+      MYSQL_PASSWORD: r00tme
 
   idp:
     build: ./shibboleth
     container_name: idp
     hostname: idp
+    entrypoint: java -Didp.home=/opt/shibboleth-idp -Djetty.base=/opt/shibboleth-idp/jetty-base -Djetty.logs=/opt/shibboleth-idp/jetty-base/logs -jar /dists/jetty/start.jar
+    # entrypoint: tail -f /var/log/bootstrap.log
+    # network_mode: host
     networks:
-      - dckr
+      openstack:
+        ipv4_address: 172.22.0.4
+    extra_hosts:
+      - "ldap:172.22.0.2"
     ports:
       - "443:8443"
     depends_on:
@@ -36,7 +43,8 @@ services:
      container_name: ldap
      hostname: ldap
      networks:
-       - dckr
+       openstack:
+         ipv4_address: 172.22.0.2
      environment:
        LDAP_ORGANISATION: Openstack
        LDAP_DOMAIN: openstack.com
@@ -45,8 +53,10 @@ services:
   phpldapadmin:
      image: osixia/phpldapadmin
      hostname: phpldapadmin
+     container_name: phpldapadmin
      networks:
-       - dckr
+       openstack:
+         ipv4_address: 172.22.0.5
      environment:
        PHPLDAPADMIN_LDAP_HOSTS: ldap
        PHPLDAPADMIN_HTTPS: "false"
@@ -60,11 +70,11 @@ services:
         keystone_version: stable/ocata
     environment:
       bootstrap: 1
-
     container_name: keystone
     hostname: keystone
     networks:
-      - dckr
+      openstack:
+        ipv4_address: 172.22.0.6
     depends_on:
       - database
       - ldap
