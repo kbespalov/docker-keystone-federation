@@ -25,8 +25,13 @@ Containerized Openstack Keystone federation dev-environment.
 
 `docker exec -it keystone /bin/bash -x /home/keystone/bootstrap/keystone/init-federation.sh`
 
-3) Try to get unscoped token via Idp SSO:
-`http://<keystone>:5000/v3/OS-FEDERATION/identity_providers/shibboleth/protocols/saml2/auth`
+3) Try to get unscoped token via Idp SSO (replace `keystone` with real IP address of container):
 
-Password to everything: `r00tme`
-Existing users (stored in LDAP): `dm` and `admin`
+http://keystone:5000/v3/OS-FEDERATION/identity_providers/shibboleth/protocols/saml2/auth
+
+ - Password to everything: `r00tme`.
+ - Existing users (stored in LDAP): `dm` and `admin`
+
+4) Also available SAML2 ECP (non-browsing access) support via next endpoint:
+
+http://idp/idp/profile/SAML2/SOAP/ECP/
