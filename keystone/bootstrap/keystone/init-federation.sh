@@ -8,14 +8,18 @@
 # -- assingment: role _member_ for federated_users in federation
 
 openstack group create federated_users --domain Default
+openstack group create federated_admins --domain Default
+
 openstack project create --domain Default federation
 
 # add admin and member roles to project federation
 openstack role add --project federation --group federated_users _member_
-openstack role add --project federation --group federated_users admin
+
+openstack role add --project federation --group federated_admins _member_
+openstack role add --project federation --group federated_admins admin
 
 openstack mapping create \
-        --rules /home/keystone/bootstrap/keystone/federation-mapping.json \
+        --rules /home/keystone/bootstrap/keystone/mapping.json \
         ldap-map
 
 openstack identity provider create \

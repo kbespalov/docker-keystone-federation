@@ -27,7 +27,7 @@ a2ensite keystone
 a2enmod shib2
 service shibd start
 
-echo 'http://keystone:5000/v3/OS-FEDERATION/identity_providers/shib/protocols/saml2/auth'
-echo '/bin/bash -x /home/keystone/bootstrap/keystone/init-federation.sh'
+#echo 'http://keystone:5000/v3/OS-FEDERATION/identity_providers/shib/protocols/saml2/auth'
+#echo '/bin/bash -x /home/keystone/bootstrap/keystone/init-federation.sh'
 
 apache2ctl -D FOREGROUND
