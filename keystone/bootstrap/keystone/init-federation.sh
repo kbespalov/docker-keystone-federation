@@ -19,7 +19,7 @@ openstack role add --project federation --group federated_admins _member_
 openstack role add --project federation --group federated_admins admin
 
 openstack mapping create \
-        --rules /home/keystone/bootstrap/keystone/mapping.json \
+        --rules /home/keystone/bootstrap/keystone/mappings/kb-no-group-mapping.json \
         ldap-map
 
 openstack identity provider create \

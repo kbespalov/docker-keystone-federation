@@ -50,6 +50,19 @@ objectClass: top
 
 -
 
+dn: cn=kb,ou=Users,dc=openstack,dc=com
+changetype: add
+cn: kb
+description: Openstack Principal Engineer
+mail: kb@openstack.com
+userPassword:: e01ENX1zS1dVQm9BMWJDNzNNRERnbjVFdlhnPT0=
+sn: kb
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+
+-
+
 dn: cn=enabled,ou=Groups,dc=openstack,dc=com
 changetype: add
 cn: enabled

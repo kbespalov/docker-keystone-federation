@@ -16,6 +16,7 @@
         <property name="profileConfigurations">
             <list>
               <bean parent="SAML2.SSO" p:encryptAssertions="false" />
+              <ref bean="SAML2.ECP" />
             </list>
         </property>
     </bean>

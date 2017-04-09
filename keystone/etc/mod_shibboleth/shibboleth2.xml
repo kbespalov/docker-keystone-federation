@@ -9,7 +9,7 @@
 
       <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
                 checkAddress="false" handlerSSL="false" cookieProps="http">
-                
+
           <SSO entityID="http://idp/idp/shibboleth" ECP="true"> SAML2 SAML1 </SSO>
           <Logout>SAML2 Local</Logout>
           <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
@@ -17,6 +17,7 @@
           <Handler type="Session" Location="/Session" showAttributeValues="true"/>
           <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>
 
+          
       </Sessions>
 
       <Errors supportContact="root@localhost"

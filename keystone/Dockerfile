@@ -33,7 +33,8 @@ COPY ./etc/mod_shibboleth/attribute-map.xml /etc/shibboleth/attribute-map.xml
 RUN chown -R keystone: /etc/keystone /var/www/cgi-bin/keystone /var/log/apache2 /home/keystone \
     && chmod -R 700 /etc/keystone/fernet-keys \
     && chmod -R 500 /etc/keystone/credential-keys \
-    && chown -R _shibd:_shibd  /etc/shibboleth/*
+    && chown -R _shibd:_shibd  /etc/shibboleth/* \
+    && chown -R _shibd:_shibd  /etc/shibboleth/
 
 WORKDIR /home/keystone/bootstrap
 CMD /bin/bash -x ./run.sh
