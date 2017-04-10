@@ -1,0 +1,21 @@
+[
+  {
+    "remote": [
+      {
+        "type": "cn",
+        "whitelist":["kb"]
+      },
+      {
+        "type": "mail"
+      }
+    ],
+    "local": [
+      {
+        "user": {
+          "name":  "{0}",
+          "email": "{1}"
+        }
+      }
+    ]
+  }
+]
