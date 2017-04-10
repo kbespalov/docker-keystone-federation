@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. /home/keystone/bootstrap/keystone/openrcs/openrc
+. /home/keystone/bootstrap/keystone/openrcs/openrc.sh
 
 # [1] Setup the next keystone entities:
 # -- group: federated_users
@@ -27,4 +27,4 @@ openstack identity provider create \
 
 openstack federation protocol create \
         --identity-provider shibboleth \
-        --mapping ldap-map saml2 --debug
+        --mapping ldap-map saml2

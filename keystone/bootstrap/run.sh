@@ -1,6 +1,13 @@
 #!/bin/sh
 
-if [[ -n "${bootstrap}" ]]; then
+
+/usr/bin/memcached -u root & >/dev/null || true
+a2ensite keystone
+service shibd start
+service apache2 restart
+
+if [ ! -f /home/keystone/bootstrap/bootstraped ]
+then
 
 /bin/bash -x /home/keystone/bootstrap/mysql/init-db.sh
 /bin/bash -x /home/keystone/bootstrap/ldap/init-domain.sh
@@ -18,16 +25,8 @@ keystone-manage bootstrap \
       --bootstrap-public-url http://keystone:5000 \
       --bootstrap-internal-url http://keystone:5000
 
-  echo "ServerName $HOSTNAME" >> /etc/apache2/apache2.conf
+/bin/bash -x /home/keystone/bootstrap/keystone/init-federation.sh
+echo "ok" > /home/keystone/bootstrap/bootstraped
 fi
 
-/usr/bin/memcached -u root & >/dev/null || true
-
-a2ensite keystone
-a2enmod shib2
-service shibd start
-
-#echo 'http://keystone:5000/v3/OS-FEDERATION/identity_providers/shib/protocols/saml2/auth'
-#echo '/bin/bash -x /home/keystone/bootstrap/keystone/init-federation.sh'
-
-apache2ctl -D FOREGROUND
+tail -f /var/log/apache2/keystone.log

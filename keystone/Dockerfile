@@ -15,7 +15,7 @@ ARG keystone_version
 RUN git clone -b "$keystone_version" https://github.com/openstack/keystone.git
 
 RUN useradd --user-group keystone \
-    && pip install --upgrade /keystone \
+    && pip install -e /keystone \
     && pip install PyMySQL python-memcached python-openstackclient python-ldap ldappool \
     && mkdir -p /etc/keystone/fernet-keys /etc/keystone/credential-keys /var/www/cgi-bin/keystone /var/log/apache2 /home/keystone \
     && cp -r /keystone/etc/* /etc/keystone/ \
@@ -36,5 +36,6 @@ RUN chown -R keystone: /etc/keystone /var/www/cgi-bin/keystone /var/log/apache2 
     && chown -R _shibd:_shibd  /etc/shibboleth/* \
     && chown -R _shibd:_shibd  /etc/shibboleth/
 
+RUN echo "ServerName $HOSTNAME" >> /etc/apache2/apache2.conf
 WORKDIR /home/keystone/bootstrap
 CMD /bin/bash -x ./run.sh
