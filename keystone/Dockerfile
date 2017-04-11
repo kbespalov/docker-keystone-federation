@@ -12,11 +12,14 @@ RUN apt-get -y update \
     && apt-get -y clean
 
 ARG keystone_version
+
 RUN git clone -b "$keystone_version" https://github.com/openstack/keystone.git
+RUN git clone -b "$keystone_version" https://github.com/openstack/requirements
 
 RUN useradd --user-group keystone \
-    && pip install -e /keystone \
-    && pip install PyMySQL python-memcached python-openstackclient python-ldap ldappool \
+    && pip install -e /keystone -c /requirements/upper-constraints.txt
+
+RUN pip install pbr PyMySQL python-memcached python-openstackclient python-ldap ldappool -c /requirements/upper-constraints.txt \
     && mkdir -p /etc/keystone/fernet-keys /etc/keystone/credential-keys /var/www/cgi-bin/keystone /var/log/apache2 /home/keystone \
     && cp -r /keystone/etc/* /etc/keystone/ \
     && touch /etc/keystone/fernet-keys/.placeholder

@@ -17,14 +17,14 @@
           <Handler type="Session" Location="/Session" showAttributeValues="true"/>
           <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>
 
-          
+
       </Sessions>
 
       <Errors supportContact="root@localhost"
           helpLocation="/about.html"
           styleSheet="/shibboleth-sp/main.css"/>
 
-      <MetadataProvider type="XML" uri="http://idp/idp/shibboleth"
+      <MetadataProvider type="XML" uri="https://idp/idp/shibboleth"
          backingFilePath="/etc/shibboleth/idp.xml"
         reloadInterval="7200"/>
 

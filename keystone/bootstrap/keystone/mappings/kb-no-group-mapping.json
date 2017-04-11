@@ -2,6 +2,9 @@
   {
     "remote": [
       {
+        "type": "cn"
+      },
+      {
         "type": "cn",
         "whitelist":["kb"]
       },

@@ -8,7 +8,7 @@ networks:
        config:
           - subnet: 172.22.0.0/24
 services:
-  
+
   database:
     image: mysql
     container_name: database
@@ -67,7 +67,7 @@ services:
     build:
       context: ./keystone
       args:
-        keystone_version: stable/ocata
+        keystone_version: stable/newton
     environment:
       bootstrap: 1
     container_name: keystone

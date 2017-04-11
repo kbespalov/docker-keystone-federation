@@ -28,3 +28,9 @@ openstack identity provider create \
 openstack federation protocol create \
         --identity-provider shibboleth \
         --mapping ldap-map saml2
+
+
+# just for testing
+openstack project create test
+openstack role add --project test --user admin _member_
+openstack role add --project test --user admin admin
