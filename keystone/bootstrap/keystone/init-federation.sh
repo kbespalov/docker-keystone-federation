@@ -13,8 +13,10 @@ openstack group create federated_admins --domain Default
 openstack project create --domain Default federation
 
 # add admin and member roles to project federation
-openstack role add --project federation --group federated_users _member_
+openstack role create _member_
+openstack role create admin
 
+openstack role add --project federation --group federated_users _member_
 openstack role add --project federation --group federated_admins _member_
 openstack role add --project federation --group federated_admins admin
 
